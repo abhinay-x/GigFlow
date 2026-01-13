@@ -11,7 +11,7 @@ The platform implements secure authentication, complex database relationships, r
 Frontend: https://your-vercel-link.vercel.app  
 Backend: https://gigflow-bff7.onrender.com 
 
-📽️ Demo Video (Loom): https://loom.com/share/your-video
+📽️ Demo Video (Google Drive):https://drive.google.com/file/d/1a-KKmk8gp7WlUMECS2VfepnBgMglbRec/view?usp=sharing
 
 ---
 
@@ -148,8 +148,8 @@ frontend/
 ## 👤 Author
 
 **Abhinay**
-GitHub: [https://github.com/yourusername](https://github.com/yourusername)
-LinkedIn: [https://linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)
+GitHub: [https://github.com/abhinay-x](https://github.com/abhinay-x)
+LinkedIn: [https://linkedin.com/in/abhinay-chary](https://linkedin.com/in/abhinay-chary)
 
 ---
 
