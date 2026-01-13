@@ -1,4 +1,5 @@
 import { createGig, getGigs, getGigById, getGigsByOwner } from '../services/gig.service.js';
+import User from '../models/User.js';
 
 export const createGigController = async (req, res) => {
   try {
@@ -17,6 +18,18 @@ export const createGigController = async (req, res) => {
       deadline,
       ownerId: req.user._id
     });
+
+    const io = req.app.get('io');
+    if (io) {
+      const otherUsers = await User.find({ _id: { $ne: req.user._id } }).select('_id');
+      otherUsers.forEach((u) => {
+        io.to(u._id.toString()).emit('notification', {
+          type: 'gig_posted',
+          message: `New gig posted: ${gig.title}`,
+          gig
+        });
+      });
+    }
     res.status(201).json(gig);
   } catch (error) {
     res.status(400).json({ message: error.message });
