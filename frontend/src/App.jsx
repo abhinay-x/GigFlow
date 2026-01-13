@@ -25,6 +25,23 @@ import TermsOfUse from './pages/TermsOfUse';
 import CookiePolicy from './pages/CookiePolicy';
 import { Toaster } from 'react-hot-toast';
 
+/**
+ * App router + global side effects.
+ *
+ * Socket lifecycle:
+ * - After `getMe()` confirms authentication, connect Socket.IO.
+ * - Emit `join(userId)` to subscribe the user to a private room.
+ * - Listen for `hired`, `notification`, and messaging events.
+ * - On logout/unmount, remove listeners and disconnect.
+ *
+ * Notification handling:
+ * - `hired` event: display success toast and add notification.
+ * - `notification` event: display success toast and add notification.
+ * - `message:new` event: add incoming message, display success toast, and add notification if not sent by current user.
+ * - `message:updated` event: update incoming message.
+ * - `message:deleted` event: remove incoming message.
+ */
+
 function ProtectedRoute({ children }) {
   const { isAuthenticated } = useSelector((state) => state.auth);
   return isAuthenticated ? children : <Navigate to="/login" replace />;

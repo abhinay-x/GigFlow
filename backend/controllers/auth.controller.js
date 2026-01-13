@@ -1,5 +1,27 @@
 import { register, login, getMe } from '../services/auth.service.js';
 
+/**
+ * Auth controllers.
+ *
+ * Cookie strategy:
+ * - Stores JWT in an HttpOnly cookie named `token`.
+ * - In production/cross-site deployments (Vercel -> Render), the cookie must be:
+ *   `sameSite: 'none'` and `secure: true` to be accepted by modern browsers.
+ * - Client must send credentials (`withCredentials: true`) for API calls.
+ *
+ * Endpoints:
+ * - `POST /register`: Creates a new user.
+ * - `POST /login`: Authenticates an existing user.
+ * - `GET /me`: Retrieves the authenticated user's data.
+ * - `POST /logout`: Clears the authentication cookie.
+ */
+
+/**
+ * Creates a new user.
+ *
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 export const registerController = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -23,6 +45,12 @@ export const registerController = async (req, res) => {
   }
 };
 
+/**
+ * Authenticates an existing user.
+ *
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 export const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -46,6 +74,12 @@ export const loginController = async (req, res) => {
   }
 };
 
+/**
+ * Retrieves the authenticated user's data.
+ *
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 export const getMeController = async (req, res) => {
   try {
     const user = await getMe(req.user._id);
@@ -55,6 +89,12 @@ export const getMeController = async (req, res) => {
   }
 };
 
+/**
+ * Clears the authentication cookie.
+ *
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 export const logoutController = (req, res) => {
   res.clearCookie('token', {
     httpOnly: true,

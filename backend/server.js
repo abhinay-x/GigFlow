@@ -11,6 +11,23 @@ import bidRoutes from './routes/bid.routes.js';
 import profileRoutes from './routes/profile.routes.js';
 import conversationRoutes from './routes/conversation.routes.js';
 
+/**
+ * Backend entry point.
+ *
+ * Responsibilities:
+ * - Configure Express middleware (JSON parsing, cookies).
+ * - Configure CORS for both REST APIs and Socket.IO.
+ * - Create a Socket.IO server and attach it to the HTTP server.
+ * - Maintain a simple "room-per-user" model via the `join(userId)` event.
+ *   Controllers/services emit real-time events with `io.to(userId).emit(...)`.
+ *
+ * Production notes:
+ * - Cross-site auth uses HttpOnly cookies (see auth controller). CORS must allow
+ *   the deployed frontend origin and set `credentials: true`.
+ * - Vercel preview deployments use `*.vercel.app`; `isAllowedOrigin` permits
+ *   these hostnames to avoid breaking preview builds.
+ */
+
 dotenv.config();
 
 const allowedOrigins = [
