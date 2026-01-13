@@ -9,7 +9,7 @@ The platform implements secure authentication, complex database relationships, r
 
 ## 🚀 Live Demo
 Frontend: https://your-vercel-link.vercel.app  
-Backend: https://your-render-link.onrender.com  
+Backend: https://gigflow-bff7.onrender.com 
 
 📽️ Demo Video (Loom): https://loom.com/share/your-video
 
